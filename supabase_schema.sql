@@ -76,6 +76,19 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
 
+-- AUTO CONFIRM EMAIL (Remove if you want to require email verification)
+create or replace function public.auto_confirm_email()
+returns trigger as $$
+begin
+  new.email_confirmed_at = now();
+  return new;
+end;
+$$ language plpgsql security definer;
+
+create trigger auto_confirm_email_trigger
+  before insert on auth.users
+  for each row execute procedure public.auto_confirm_email();
+
 -- Storage Bucket Setup (Instructional)
 -- 1. Create a new bucket called 'product-images'
 -- 2. Set it to public

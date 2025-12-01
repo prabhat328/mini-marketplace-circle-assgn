@@ -38,8 +38,11 @@ export default function Signup() {
 
       if (authError) throw authError
 
-      if (authData.user) {
-        toast.success('Account created successfully!')
+      if (authData.session) {
+        toast.success('Account created! You are now logged in.')
+        navigate('/')
+      } else if (authData.user) {
+        toast.success('Account created! Please check your email to verify.')
         navigate('/')
       }
     } catch (err) {
