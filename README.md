@@ -46,7 +46,3 @@ A clean, production-ready mini-marketplace built with React, Vite, TailwindCSS, 
    ```bash
    npm run dev
    ```
-
-## Deployment
-
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for step-by-step deployment instructions.

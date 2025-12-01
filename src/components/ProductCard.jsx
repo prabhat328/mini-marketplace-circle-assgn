@@ -30,7 +30,7 @@ export default function ProductCard({ product, onClick }) {
           </p>
         </div>
         <p className="text-sm font-medium text-zinc-900">
-          {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}
+          {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(product.price)}
         </p>
       </div>
     </div>

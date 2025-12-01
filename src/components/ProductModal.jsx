@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { X, Phone, Mail, User, ShieldCheck } from 'lucide-react'
+import { X, Phone, Mail, User, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 
 export default function ProductModal({ product, onClose }) {
@@ -51,7 +51,7 @@ export default function ProductModal({ product, onClose }) {
 
           <div className="flex flex-col md:flex-row h-full md:h-[600px]">
             {/* Image Gallery */}
-            <div className="w-full md:w-1/2 bg-zinc-100 relative">
+            <div className="w-full md:w-1/2 bg-zinc-100 relative group">
               {product.images && product.images.length > 0 ? (
                 <>
                   <img
@@ -60,17 +60,37 @@ export default function ProductModal({ product, onClose }) {
                     className="h-full w-full object-cover"
                   />
                   {product.images.length > 1 && (
-                    <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-                      {product.images.map((_, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => setActiveImage(idx)}
-                          className={`w-2 h-2 rounded-full transition-colors ${
-                            activeImage === idx ? 'bg-white' : 'bg-white/50'
-                          }`}
-                        />
-                      ))}
-                    </div>
+                    <>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setActiveImage((prev) => (prev === 0 ? product.images.length - 1 : prev - 1))
+                        }}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 text-zinc-800 transition-colors shadow-sm opacity-0 group-hover:opacity-100"
+                      >
+                        <ChevronLeft className="h-5 w-5" />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setActiveImage((prev) => (prev === product.images.length - 1 ? 0 : prev + 1))
+                        }}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 text-zinc-800 transition-colors shadow-sm opacity-0 group-hover:opacity-100"
+                      >
+                        <ChevronRight className="h-5 w-5" />
+                      </button>
+                      <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+                        {product.images.map((_, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => setActiveImage(idx)}
+                            className={`w-2 h-2 rounded-full transition-colors ${
+                              activeImage === idx ? 'bg-white' : 'bg-white/50'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </>
                   )}
                 </>
               ) : (
@@ -90,7 +110,7 @@ export default function ProductModal({ product, onClose }) {
                   {product.name}
                 </h2>
                 <p className="text-2xl font-medium text-zinc-900 mb-8">
-                  {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}
+                  {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(product.price)}
                 </p>
 
                 <div className="prose prose-zinc prose-sm mb-10 text-zinc-600 font-light leading-relaxed">

@@ -29,7 +29,9 @@ create table public.products (
   id uuid default gen_random_uuid() primary key,
   user_id uuid references public.users(id) on delete cascade not null,
   name text not null,
+  description text,
   price numeric not null,
+  category text,
   images text[] not null default '{}',
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
