@@ -152,12 +152,7 @@ export default function ProductModal({ product, onClose }) {
                         </div>
                       )}
 
-                      <div className="mt-6 p-4 bg-zinc-50 flex items-start">
-                        <ShieldCheck className="h-5 w-5 text-zinc-400 mr-3 mt-0.5" />
-                        <p className="text-xs text-zinc-500">
-                          This seller has been verified by Lumina. Transactions are secure and protected.
-                        </p>
-                      </div>
+
                     </div>
                   ) : (
                     <p className="text-zinc-500 italic">Seller information unavailable</p>
